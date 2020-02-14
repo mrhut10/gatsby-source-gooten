@@ -1,0 +1,16 @@
+{
+  "name": "gatsby-source-gooten",
+  "version": "1.0.0",
+  "description": "a gatsby source plugin to get data from gooten.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gooten"
+  ],
+  "author": "Alistair Hutten <ahut10@gmail.com>",
+  "license": "MIT"
+}
