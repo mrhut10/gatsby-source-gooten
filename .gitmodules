@@ -1,0 +1,3 @@
+[submodule "imports/gooten-js"]
+	path = imports/gooten-js
+	url = https://github.com/printdotio/gooten-js
