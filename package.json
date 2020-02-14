@@ -4,13 +4,23 @@
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir . --ignore **/__tests__",
+    "prepare": "cross-env NODE_ENV=production npm run build",
+    "watch": "babel -w src --out-dir . --ignore **/__tests__"
   },
   "keywords": [
     "gatsby",
     "gatsby-plugin",
     "gooten"
   ],
+  "peerDependencies": {
+    "gatsby": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby.git",
+    "directory": "/"
+  },
   "author": "Alistair Hutten <ahut10@gmail.com>",
   "license": "MIT"
 }
