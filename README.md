@@ -1,11 +1,11 @@
-# gatsby-source-gooten
+# Gatsby-Source-Gooten
 
 Just starting project so not functional yet,
 
 Aim: Source plugin to pull data out from [www.gooten.com](https://www.gooten.com)
 
 
-first gatsby-source-plugin so would love help to make it good,
+first Gatsby-source-plugin so would love help to make it good,
 
 Progress:
   - Show Supported Currencies
