@@ -1,15 +1,8 @@
 const axois = require('axios')
+const { parseResponse } = require('./common')
 const GetCountryCodes = require('./countryCodes').default
+const getProducts = require('./products').default
 
-const parseResponse = response => {
-  if (response.status === 200){
-    return response.data
-  } else {
-    console.warm(`\n unable to parse Response code:${response.status}\n full server reply`, response)
-  }
-}
-
-// const GetCurrencies = require('./currencies').default
 
 const GetCurrencies = ({
   actions,
@@ -18,11 +11,12 @@ const GetCurrencies = ({
   createNodeId,
   createContentDigest
 }) => async options => {
-  const { recipeId } = options
+  const { recipeId, url } = options
   const { createNode } = actions
 
   await (
-    axois.get(`https://api.print.io/api/v/5/source/api/currencies`, {params: {recipeId}})
+    axois
+    .get(`${url}/currencies`, {params: {recipeId}})
     .then(parseResponse)
     .then(data => {
       const { Currencies: currencies } = data
@@ -68,7 +62,9 @@ exports.default = (
   },
   options
 ) => {
-  if (!options.recipeId){
+  if (!options.url){
+    console.warn('gooten-source-plugin didn\'t run as url was missing')
+  } else if (!options.recipeId){
     console.warn('gooten-source-plugin didn\'t run as recipeId not configured')
   } else if (!options.countryCode){
     console.warn('gooten-source-plugin didn\'t run as countryCode not configured')
@@ -76,6 +72,7 @@ exports.default = (
     return ({
       currencies: GetCurrencies({ actions, store, cache, createNodeId, createContentDigest })(options),
       countryCodes: GetCountryCodes({ actions, store, cache, createNodeId, createContentDigest })(options),
+      products: getProducts({ actions, store, cache, createNodeId, createContentDigest })(options),
     })
   }
 }
