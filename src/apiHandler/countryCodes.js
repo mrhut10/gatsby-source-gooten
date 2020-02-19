@@ -11,10 +11,9 @@ const GetCountryCodes = ({
   const { createNode } = actions
 
   countryCodes
-  .map(({Name, Code}) => ({name:Name, code:Code}))
-  .forEach(({name, code}) => {
-    const id = createNodeId(`GootenCountryCode-${code}`)
-    const nodeData = {name, code, selected: (options.countryCode || '').toLowerCase()  === code.toLowerCase() }
+  .forEach(({Name, Code}) => {
+    const id = createNodeId(`GootenCountryCode-${Code}`)
+    const nodeData = {Name, Code, Selected: options.CountryCode && (options.CountryCode.toLowerCase()  === Code.toLowerCase())}
     const nodeMeta = {
       id,
       parent: null,
@@ -27,9 +26,10 @@ const GetCountryCodes = ({
         description: 'these are the country codes \n see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 \n download from https://datahub.io/core/country-list'
       },
     }
-    const node = Object.assign({}, nodeData, nodeMeta)
-    createNode(node)
+    createNode({...nodeData, ...nodeMeta})
   })
+  if (!countryCodes.find(item => options.countryCode && options.countryCode.toLowerCase() === item.Code.toLowerCase()))
+    console.warn(`countryCode: ${options.countryCode} doesn't appear to be valid please check`)
 }
 
 exports.default = GetCountryCodes

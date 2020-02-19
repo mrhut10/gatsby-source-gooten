@@ -11,22 +11,19 @@ const GetCurrencies = ({
   createNodeId,
   createContentDigest
 }) => async options => {
-  const { recipeId, url } = options
+  const { recipeId, url, currencyCode} = options
   const { createNode } = actions
 
-  await (
-    axois
-    .get(`${url}/currencies`, {params: {recipeId}})
-    .then(parseResponse)
-    .then(data => {
-      const { Currencies: currencies } = data
-
+  if (url, recipeId){
+    const request = await axois.get(`${url}/currencies`, {params: {recipeId}})
+    const response = parseResponse(request)
+    const { Currencies: currencies } = response
       currencies.forEach(currency => {
-        const {Name: name, Code: code, Format: format} = currency
-        const id = createNodeId(`Gootencurrency-${code}`)
-        const nodeData = {name, code, format}
+      ''.toLowerCase
+      const {Name, Code, Format} = currency
+      const nodeData = {Name, Code, Format, Selected: currencyCode && currencyCode.toLowerCase() === Code.toLowerCase()}
         const nodeMeta = {
-          id,
+        id: createNodeId(`Gootencurrency-${Code}`),
           parent: null,
           children: [],
           internal: {
@@ -36,21 +33,11 @@ const GetCurrencies = ({
             contentDigest: createContentDigest(nodeData),
           },
         }
-        const node = Object.assign({}, nodeData, nodeMeta)
-        createNode(node)
-      })
+      createNode({...nodeData, ...nodeMeta})
     })
-    .catch(response => console.error(response))
-  )
+    if (!currencies.find(currency => currency.Code.toLowerCase() === currencyCode.toLowerCase())) console.warn(`currencyCode: ${currencyCode} doesn't appear to be a valid option please verify`)
+  }
 };
-
-const spy = input => {
-  console.warn('spy', input)
-  return input
-};
-
-
-
 
 exports.default = (
   {
@@ -62,13 +49,7 @@ exports.default = (
   },
   options
 ) => {
-  if (!options.url){
-    console.warn('gooten-source-plugin didn\'t run as url was missing')
-  } else if (!options.recipeId){
-    console.warn('gooten-source-plugin didn\'t run as recipeId not configured')
-  } else if (!options.countryCode){
-    console.warn('gooten-source-plugin didn\'t run as countryCode not configured')
-  } else {
+  if (options.url && options.recipeId){
     return ({
       currencies: GetCurrencies({ actions, store, cache, createNodeId, createContentDigest })(options),
       countryCodes: GetCountryCodes({ actions, store, cache, createNodeId, createContentDigest })(options),
