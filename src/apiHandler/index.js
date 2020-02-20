@@ -51,8 +51,11 @@ exports.default = (
 ) => {
   if (options.url && options.recipeId){
     return ({
+      // list of supported currencies
       currencies: GetCurrencies({ actions, store, cache, createNodeId, createContentDigest })(options),
+      // list of iso country codes
       countryCodes: GetCountryCodes({ actions, store, cache, createNodeId, createContentDigest })(options),
+      // list of products and product variants
       products: getProducts({ actions, store, cache, createNodeId, createContentDigest })(options),
     })
   }
