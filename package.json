@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-gooten",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,13 @@
   "keywords": [
     "gatsby",
     "gatsby-plugin",
-    "gooten"
+    "gooten",
+    "print",
+    "print on demand",
+    "ecom",
+    "ecommerce",
+    "dropship",
+    "dropshipping"
   ],
   "peerDependencies": {
     "gatsby": "^2.2.0"
