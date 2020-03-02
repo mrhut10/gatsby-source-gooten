@@ -13,9 +13,23 @@ const renameIdField = ({Products: products}) => products.map(
 
 const parseResponseAndRenameIdField = input => renameIdField( parseResponse( input ) )
 
+const _getProductTemplates = options => async sku => {
+  const {url, recipeId} = options;
+  const apiParams = {recipeId, Sku: sku}
+  if (url && recipeId && sku){
+    const { Options: productTemplates } = await axois
+      .get(`${url}/producttemplates`, {params: apiParams, timeout: 10000 })
+      .then(parseResponse)
+    return productTemplates;
+  } else {
+    return []
+  }
+}
+
 const _getProductVariants = options => async productId => {
   const {url, recipeId, countryCode, currencyCode } = options
   const apiParams = {recipeId, countryCode, currencyCode, productId}
+  const getProductTemplates = _getProductTemplates(options)
 
   if (url, recipeId, countryCode, currencyCode, productId){
     const apiResults = [
@@ -26,12 +40,21 @@ const _getProductVariants = options => async productId => {
     const [{ProductVariants: setupVariants}, {ProductVariants: allVariants}] = await Promise.all(apiResults)
 
     return allVariants
-      ? allVariants.map(
-        variant => ({
-          ...variant,
-          // HasDefinitionInProductHub:
-        })
-      )
+      ? await Promise.all(
+          allVariants.map(
+            async variant => {
+              const templateData = Boolean(variant.HasTemplates) ? await getProductTemplates(variant.Sku).catch(e => {
+                // console.log(e);
+              }) : mull;
+
+              return {
+                ...variant,
+                HasDefinitionInProductHub: Boolean(setupVariants && setupVariants.find(item => item.Sku === variant.Sku)),
+                productTemplates: templateData ? templateData : [],
+              };
+            }
+          )
+        )
       : []
   } else {
     return []
