@@ -1,1 +1,2 @@
 //no-op
+"use strict";
