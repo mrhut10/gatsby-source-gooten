@@ -1,11 +1,11 @@
 {
   "name": "gatsby-source-gooten",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir . --ignore **/__tests__",
-    "prepublish": "npm run build",
+    "preinstall": "npm run build",
     "watch": "babel --watch src --out-dir . --ignore **/__tests__"
   },
   "keywords": [
