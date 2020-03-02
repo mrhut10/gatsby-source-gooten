@@ -20,6 +20,9 @@ Currently plugin will provide the following data to gatsbys graphQL data
 ```javascript
 // In your gatsby-config.js
 module.exports = {
+  const result = require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
   plugins: [
     {
       resolve: 'gatsby-source-gooten',

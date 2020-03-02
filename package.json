@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-gooten",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
