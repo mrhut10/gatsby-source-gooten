@@ -1,2 +1,4 @@
 node_modules
 apiHandler/*.js
+index.js
+gatsby-node.js
