@@ -1,5 +1,5 @@
 // const ApiCurrencies = require('./src/apiRequests/ApiCurrencies')
-const apiHandler = require('./apiHandler')
+import apiHandler from './apiHandler'; // const apiHandler = require('./apiHandler')
 
 const defaultOptions = {
   countryCode: 'US',

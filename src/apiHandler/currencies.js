@@ -1,6 +1,5 @@
-const { parseResponse } = require('./common');
-const axois = require('axios')
-
+import { parseResponse } from './common';
+import axois from 'axios';
 
 const GetCurrencies = ({
   actions,

@@ -1,8 +1,8 @@
-const axois = require('axios');
-const { parseResponse } = require('./common');
-const GetCurrencies = require('./currencies').default;
-const GetCountryCodes = require('./countryCodes').default;
-const getProducts = require('./products').default;
+import axois from 'axios'
+import { parseResponse } from './common';
+import GetCurrencies from './currencies'
+import GetCountryCodes from './countryCodes'; 
+import getProducts from './products';
 
 
 exports.default = (

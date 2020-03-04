@@ -1,6 +1,5 @@
-const axois = require('axios')
-
-const { parseResponse, spy } = require('./common')
+import axois from 'axios';
+import { parseResponse } from './common';
 
 const renameIdField = ({Products: products}) => products.map(
   product => {
