@@ -4,8 +4,7 @@ import GetCurrencies from './currencies'
 import GetCountryCodes from './countryCodes'; 
 import getProducts from './products';
 
-
-exports.default = (
+export default (
   {
     actions,
     store,
