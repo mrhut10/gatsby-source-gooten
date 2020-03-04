@@ -53,7 +53,7 @@ exports.sourceNodes = async (
   
   const params = {...defaultOptions, ...options}
   if (!validationErrors.length > 0){
-    const api = apiHandler.default({actions, store, cache, createNodeId, createContentDigest}, params)
+    const api = apiHandler({actions, store, cache, createNodeId, createContentDigest}, params)
     return Promise.all(api ? Object.keys(api).map(key => api[key]) : [])
   }
 }
