@@ -1,12 +1,17 @@
 {
   "name": "gatsby-source-gooten",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
+    "prepack": "babel src --out-dir . --ignore **/__tests__ --copy-files",
     "build": "babel src --out-dir . --ignore **/__tests__ --copy-files",
     "watch": "babel --watch src --out-dir . --ignore **/__tests__"
   },
+  "files": [
+    "*.js",
+    "src/*"
+  ],
   "keywords": [
     "gatsby",
     "gatsby-plugin",
