@@ -105,4 +105,4 @@ const getProducts = ({
   }
 }
 
-exports.default = getProducts
+export default getProducts;

@@ -37,4 +37,4 @@ const GetCurrencies = ({
 };
 
 
-exports.default = GetCurrencies
+export default GetCurrencies

@@ -32,4 +32,4 @@ const GetCountryCodes = ({
     console.warn(`countryCode: ${options.countryCode} doesn't appear to be valid please check`)
 }
 
-exports.default = GetCountryCodes
+export default GetCountryCodes;
