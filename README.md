@@ -1,4 +1,6 @@
 # Gatsby-Source-Gooten
+[NPM Package](https://www.npmjs.com/package/gatsby-source-gooten)
+[Github source](https://github.com/mrhut10/gatsby-source-gooten)
 
 Purpose: Source plugin to pull data out from [www.gooten.com](https://www.gooten.com)
 Stage: Barebones - first plugin I've made - would love feedback, suggestions and help.
