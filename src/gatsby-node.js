@@ -20,7 +20,7 @@ const validateOptions = ({
   return messages;
 }
 
-exports.sourceNodes = (
+exports.sourceNodes = async (
   {
     actions,
     store,
@@ -52,6 +52,7 @@ exports.sourceNodes = (
   const params = {...defaultOptions, ...options}
   if (!validationErrors.length > 0){
     const api = apiHandler({actions, store, cache, createNodeId, createContentDigest}, params)
-    return Promise.all(api ? Object.keys(api).map(key => api[key]) : [])
+    await Promise.all(api ? Object.keys(api).map(key => api[key]) : [])
+    return;
   }
 }
