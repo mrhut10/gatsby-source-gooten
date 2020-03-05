@@ -5,3 +5,13 @@ export const parseResponse = response => {
     console.error(`\n unable to parse Response code:${response.status}\n full server reply`, response)
   }
 }
+
+export const setTimeoutPromise = (time, fn) => new Promise((resolve, reject) => {
+  setTimeout(
+    () => {
+      resolve('sucessfully waited')
+    },
+    time
+  );
+})
+
