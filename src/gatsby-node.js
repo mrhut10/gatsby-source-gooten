@@ -20,6 +20,35 @@ const validateOptions = ({
   return messages;
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDef = `
+    type GootenCountryCodes implements Node {
+      Name: String!
+      Code: String!
+      Selected: Boolean!
+    }
+    type GootenCurrency implements Node {
+      Name: String
+      Code: String!
+      Format: String!
+    }
+    type GootenProduct implements Node {
+      GootenId: Int!
+      UId: String!
+      Name: String!
+      ShortDescription: String!
+      HasAvailableProductVariants: Boolean!
+      HasProductTemplates: Boolean!
+      IsFeatured: Boolean!
+      IsComingSoon: Boolean!
+      MaxZoom: Int!
+
+    }
+  `;
+  createTypes(typeDef);
+};
+
 exports.sourceNodes = async (
   {
     actions,
