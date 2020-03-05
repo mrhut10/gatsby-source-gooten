@@ -4,12 +4,14 @@
   "description": "a gatsby source plugin to get data from gooten.com",
   "main": "index.js",
   "scripts": {
-    "prepack": "babel src --out-dir . --ignore **/__tests__ --copy-files",
+    "prepack": "npm run build",
+    "build": "babel src --out-dir . --ignore **/__tests__ --copy-files",
     "watch": "babel --watch src --out-dir . --ignore **/__tests__"
   },
   "files": [
     "*.js",
-    "apiHandler/*.js"
+    "apiHandler/*.js",
+    "src/*.js"
   ],
   "keywords": [
     "gatsby",
