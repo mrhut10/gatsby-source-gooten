@@ -25,17 +25,9 @@ export const setTimeoutPromise = (time, fn) => new Promise((resolve, reject) => 
     T = (1 - ratio ** n)/(1-ratio)
       = ratio**n - 1
 */
-async function retryWithGeometryInterval(fn, ratio, attempts){
-  let value;
-  Array(attempts).forEach((_, i) => {
-    value = fn();
-    if (value){
-      break;
-    } else {
-      await setTimeoutPromise(1000 * ratio ** i)
-    }
-  })
+export const retryWithGeometryInterval = async (fn, ratio, attempts) => await Array(attempts).reduce(async (accP, next, i) => {
+  const acc = await accP;
+  const value = acc ? acc : fn();
+  if (!value) await setTimeoutPromise(1000 * ratio**i);
   return value;
-}
-
-export const retryWithGeometryInterval;
+}, null)
