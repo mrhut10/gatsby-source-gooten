@@ -1,4 +1,3 @@
-// const ApiCurrencies = require('./src/apiRequests/ApiCurrencies')
 import apiHandler from './apiHandler'; // const apiHandler = require('./apiHandler')
 
 const defaultOptions = {
@@ -31,7 +30,6 @@ exports.sourceNodes = async (
   },
   options,
 ) => {
-  // const {createNode, touchNode } = actions;
 
   const optionValidationMessages = validateOptions(options)
   const validationErrors = (optionValidationMessages || []).filter(item => item[0] === 'error')
