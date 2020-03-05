@@ -91,7 +91,7 @@ const getProducts = ({
       const nodeMeta = {
         id: createNodeId(`GootenProduct-${nodeData.GootenId}`),
         parent: null,
-        children: [], // await getProductVariant(nodeData.GootenId),
+        children: [],
         internal: {
           type: 'GootenProduct',
           mediaType: 'text/html',
