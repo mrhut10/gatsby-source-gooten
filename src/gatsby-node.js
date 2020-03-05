@@ -20,7 +20,7 @@ const validateOptions = ({
   return messages;
 }
 
-exports.sourceNodes = async (
+exports.sourceNodes = (
   {
     actions,
     store,
