@@ -1,35 +1,25 @@
 import axois from 'axios';
 import { parseResponse, retryWithGeometryInterval } from './common';
 
-const renameIdField = (getNodesByType, {Products: products}) => products.map(
-  async product => {
-    const getCurrencyNode = field => () => getNodesByType('GootenCurrency').find(currency => currency.Code === product[field].CurrencyCode);
-    const GeneratePriceDetail = (feildName, CurrencyName) => ({ ...product[feildName], CurrencyName });
-    /*
-      Try to get node 8 times where time between attempts are elements from the geometric sequence
-        t=2^i   where i is the attempt index
-      Total Approx Elasps time for a certain amount of attempts is calculated by (dirieved by sum of geo sequence )
-        T= 2**n - 1  where n is the max number of attempts 
-    */
-    const RetailPriceCurency = await retryWithGeometryInterval(getCurrencyNode("RetailPrice"), 2, 8)
-    const PriceInfoCurency = await retryWithGeometryInterval(getCurrencyNode("PriceInfo"), 2, 8)
-
-    const RetailPrice = GeneratePriceDetail('RetailPrice', RetailPriceCurency.Name );
-    const PriceInfo = GeneratePriceDetail('PriceInfo', PriceInfoCurency.Name );
-    
-    const newDefinition = {
+const renameIdField = ({Products: products}) =>
+  products.map(
+    product => {
+      /*
+        Try to get node 8 times where time between attempts are elements from the geometric sequence
+          t=2^i   where i is the attempt index
+        Total Approx Elasps time for a certain amount of attempts is calculated by (dirieved by sum of geo sequence )
+          T= 2**n - 1  where n is the max number of attempts 
+      */
+      const newDefinition = {
       GootenId: product.Id,
       ...product,
-      RetailPrice,
-      PriceInfo,
-      test: RetailPriceCurency,
+      };
+      delete newDefinition['Id'];
+      return newDefinition;
     }
-    delete newDefinition['Id']
-    return newDefinition;
-  }
-)
+);
 
-const parseResponseAndRenameIdField = getNodesByType => input => renameIdField(getNodesByType, parseResponse(input))
+const parseResponseAndRenameIdField = getNodesByType => input =>  renameIdField(parseResponse(input))
 
 const _getProductTemplates = options => async sku => {
   const {url, recipeId} = options;
