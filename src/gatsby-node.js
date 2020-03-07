@@ -33,6 +33,33 @@ exports.createSchemaCustomization = ({ actions }) => {
       Code: String!
       Format: String!
     }
+    type GootenPriceInfo implements Node {
+      Price: Float!
+      CurrencyCode: String!
+      FormattedPrice: String!
+      CurrencyFormat: String!
+      CurrencyDigits: Int!
+    }
+    type GootenProductImages implements Node {
+      Url: String!
+      Index: Int!
+      Id: Int!
+      ImageTypes: [String!]!
+    }
+    type GootenProductVariant implements Node {
+      Options: [
+        OptionId: String!
+        ValueId: String!
+        Name: String!
+        Value: String!
+        ImageUrl: String!
+        SortValue: String!
+      ]
+      PriceInfo: GootenPriceInfo
+      Sku: String!
+      MaxImages: Int!
+      HasTemplates: Boolean!
+    }
     type GootenProduct implements Node {
       GootenId: Int!
       UId: String!
@@ -43,7 +70,16 @@ exports.createSchemaCustomization = ({ actions }) => {
       IsFeatured: Boolean!
       IsComingSoon: Boolean!
       MaxZoom: Int!
-
+      RetailPrice: GootenPriceInfo!
+      Info: JSON
+      Images: [GootenProductImages!]!
+      PriceInfo: GootenPriceInfo!
+      Categories: [
+        Id: Int!
+        Name: String!
+      ]!
+      HasDefinitionInProductHub: Boolean!
+      ProductVariants: [GootenProductVariant!]
     }
   `;
   createTypes(typeDef);
