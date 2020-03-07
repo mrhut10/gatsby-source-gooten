@@ -1,7 +1,7 @@
 import axois from 'axios';
 import { parseResponse, retryWithGeometryInterval } from './common';
 
-const renameIdField = ({Products: products}) =>
+const renameIdField = (getNodesByType, {Products: products}) =>
   products.map(
     product => {
       /*
@@ -19,14 +19,14 @@ const renameIdField = ({Products: products}) =>
     }
 );
 
-const parseResponseAndRenameIdField = getNodesByType => input =>  renameIdField(parseResponse(input))
+const parseResponseAndRenameIdField = getNodesByType => input =>  renameIdField(getNodesByType, parseResponse(input))
 
 const _getProductTemplates = options => async sku => {
   const {url, recipeId} = options;
   const apiParams = {recipeId, Sku: sku}
   if (url && recipeId && sku){
     const { Options: productTemplates } = await axois
-      .get(`${url}/producttemplates`, {params: apiParams, timeout: 10000 })
+      .get(`${url}/producttemplates`, {params: apiParams })
       .then(parseResponse)
     return productTemplates;
   } else {
@@ -90,7 +90,7 @@ const getProducts = ({
       axois.get(`${url}\products`, { params: apiParams }),
       // all products avaliable to region
       axois.get(`${url}\products`, { params: { ...apiParams, all: true } } )
-    ].map(request => request.then(parseResponseAndRenameIdField))
+    ].map(request => request.then(parseResponseAndRenameIdField(getNodesByType)))
 
     const [setupProducts, allProducts] = await Promise.all(apiResults)
     allProducts.forEach(async product => {
