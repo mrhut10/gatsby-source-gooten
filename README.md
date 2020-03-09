@@ -1,11 +1,17 @@
 # Gatsby-Source-Gooten
-[NPM Package](https://www.npmjs.com/package/gatsby-source-gooten)
-[Github source](https://github.com/mrhut10/gatsby-source-gooten)
+- Published Package at [NPM](https://www.npmjs.com/package/gatsby-source-gooten)
+- Source on [Github](https://github.com/mrhut10/gatsby-source-gooten)
 
 Purpose: Source plugin to pull data out from [www.gooten.com](https://www.gooten.com)
-Stage: Barebones - first plugin I've made - would love feedback, suggestions and help.
+
+# Example page using the Gooten API
+Example Gatsby Site using the plugin
+- Site: [gatsby-gooten-example-page.netlify.com/](https://gatsby-gooten-example-page.netlify.com/)
+- source: [github.com/mrhut10/gooten-gastby-example](https://github.com/mrhut10/gooten-gastby-example)
+
 
 # Current Progress
+Stage: Barebones - first plugin I've made - would love feedback, suggestions and help.
 Currently plugin will provide the following data to gatsbys graphQL data
 - All Currencies Supported by Gooten
 - Show all ISO 2 digit CountryCodes
